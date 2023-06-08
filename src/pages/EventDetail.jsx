@@ -1,11 +1,12 @@
 import React from 'react'
-import { useLoaderData, useParams } from 'react-router-dom'
-import EventForm from '../components/EventForm'
+import { useLoaderData, useRouteLoaderData } from 'react-router-dom'
+import EventItem from '../components/EventItem'
 
 function EventDetail() {
-  const data = useLoaderData()
+  const data = useRouteLoaderData('eventId')
+  // console.log(data)
   return (
-    <EventForm event={data.event} />
+    <EventItem event={data.event} />
   )
 }
 

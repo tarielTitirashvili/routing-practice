@@ -4,10 +4,6 @@ import classes from './EventsList.module.css';
 function EventsList() {
   const events = useLoaderData()
 
-  if(events.isError){
-    return <h4 color='red'> {events.message} </h4>
-  }
-
   return (
     <div className={classes.events}>
       <h1>All Events</h1>
