@@ -9,10 +9,10 @@ function MainNavigation() {
       <nav>
         <ul className={css.list}>
           <li>
-            <a><NavLink to='/' className={isActive} end>Home</NavLink></a>
+           <NavLink to='/' className={isActive} end>Home</NavLink>
           </li>
           <li>
-            <a><NavLink to='/events' className={isActive}>Events</NavLink></a>
+           <NavLink to='/events' className={isActive}>Events</NavLink>
           </li>
         </ul>
       </nav>

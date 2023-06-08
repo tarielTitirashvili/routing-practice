@@ -48,3 +48,15 @@ ul {
   margin: 0;
   padding: 0;
 }
+
+.message{
+  width:100%;
+  min-height: 30vh;
+  display: flex;
+  justify-content: center;
+  align-items:center;
+}
+.error{
+  color: rgba(255, 0, 0, 0.849);
+  text-shadow: 1px 1px 15px rgb(179, 245, 245);
+}

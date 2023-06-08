@@ -3,7 +3,7 @@ import ErrorPage from './components/errorPage'
 import EventsLayout from './layout/eventsLayout'
 import RootLayout from './layout/rootLayout'
 import EditEvent from './pages/EditEvent'
-import EventDetail from './pages/EventDetail'
+import EventDetail, { eventLoader } from './pages/EventDetail'
 import Events, { getDummyEvents } from './pages/events'
 import Home from './pages/home'
 import NewEvent from './pages/NewEvent'
@@ -40,9 +40,14 @@ const router = createBrowserRouter([
         {index: true, element: <Home />},
         {path: 'events', element: <EventsLayout/>, children: [
           {index: true, element: <Events/>, loader: getDummyEvents},
-          {path: ':eventId', element: <EventDetail />},
+          {
+            path: ':eventId', 
+            children: [
+              {index: true, element: <EventDetail /> ,loader: eventLoader},
+              {path: ':edit', element: <EditEvent/>},
+            ]
+          },
           {path: 'new', element: <NewEvent /> },
-          {path: ':eventId/edit', element: <EditEvent/>},
         ]},
       ],
   }
