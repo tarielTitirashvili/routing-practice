@@ -3,7 +3,7 @@ import ErrorPage from './components/errorPage'
 import EventsLayout from './layout/eventsLayout'
 import RootLayout from './layout/rootLayout'
 import EditEvent from './pages/EditEvent'
-import EventDetail, { eventLoader } from './pages/EventDetail'
+import EventDetail, { eventDeleteAction, eventLoader } from './pages/EventDetail'
 import Events, { getDummyEvents } from './pages/events'
 import Home from './pages/home'
 import NewEvent, { newEventAction } from './pages/NewEvent'
@@ -45,7 +45,7 @@ const router = createBrowserRouter([
             id: 'eventId',
             loader: eventLoader,
             children: [
-              {index: true, element: <EventDetail /> , },
+              {index: true, element: <EventDetail />, action: eventDeleteAction, },
               {path: ':edit', element: <EditEvent/>},
             ]
           },
