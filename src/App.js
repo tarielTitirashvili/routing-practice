@@ -6,7 +6,7 @@ import EditEvent from './pages/EditEvent'
 import EventDetail, { eventLoader } from './pages/EventDetail'
 import Events, { getDummyEvents } from './pages/events'
 import Home from './pages/home'
-import NewEvent from './pages/NewEvent'
+import NewEvent, { newEventAction } from './pages/NewEvent'
 // Challenge / Exercise
 
 // 1. Add five new (dummy) page components (content can be simple <h1> elements)
@@ -49,7 +49,7 @@ const router = createBrowserRouter([
               {path: ':edit', element: <EditEvent/>},
             ]
           },
-          {path: 'new', element: <NewEvent /> },
+          {path: 'new', element: <NewEvent /> , action: newEventAction},
         ]},
       ],
   }

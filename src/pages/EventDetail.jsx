@@ -1,5 +1,5 @@
 import React from 'react'
-import { useLoaderData, useRouteLoaderData } from 'react-router-dom'
+import { json, useLoaderData, useRouteLoaderData } from 'react-router-dom'
 import EventItem from '../components/EventItem'
 
 function EventDetail() {
@@ -18,7 +18,7 @@ export async function eventLoader({request, params}) {
     const response = await fetch('http://localhost:8080/events/'+params.eventId)
     // console.log(response)
     if(response.status !== 200){
-      throw new Response(response, { status: 500 })
+      throw json(response, { status: 500 })
     }else
       return response
 }
