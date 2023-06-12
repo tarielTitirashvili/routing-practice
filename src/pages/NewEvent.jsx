@@ -22,17 +22,19 @@ export async function newEventAction({request, params}) {
     description: data.get('description'),
   }
 
-  try{
-    const response = await fetch('http://localhost:8080/events',{
-      method:'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(eventData)
-    })
-    return redirect('/events')
-  }catch(e){
-    throw json({ message: 'Couldn\'t create event' }, {status: 500})
+  const response = await fetch('http://localhost:8080/events',{
+    method:'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(eventData)
+  })
+  if(response.status === 422){
+    return response
   }
-  
+  if(response.status===500){
+    throw json({ message: 'Couldn\'t create event' }, {status: 500})
+  }else{
+    return redirect('/events')
+  }
 }
