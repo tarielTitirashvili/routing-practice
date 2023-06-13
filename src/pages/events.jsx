@@ -1,7 +1,9 @@
-import { json } from 'react-router-dom'
+import { Suspense } from 'react'
+import { Await, defer, json, useLoaderData } from 'react-router-dom'
 import EventsList from '../components/EventsList'
+import Loading from '../components/loader'
 
-export const getDummyEvents = async () => {
+async function getEvents() {
   const response = await fetch('http://localhost:8080/events')
 
   if (!response.ok) {
@@ -13,12 +15,22 @@ export const getDummyEvents = async () => {
   }
 }
 
+export const getDummyEvents = () => {
+  return defer({
+    events: getEvents()
+  })
+}
+
 function EventsPage() {
+  const { events } = useLoaderData()
 
   return (
-    <>
-      <EventsList />
-    </>
+    <Suspense fallback={<Loading/>}>
+      <Await resolve={events}>
+        {/* we get resolved data here */}
+        {(events)=><EventsList events={events} />}
+      </Await>
+    </Suspense>
   );
 }
 
