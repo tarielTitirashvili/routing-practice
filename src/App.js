@@ -1,12 +1,13 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import ErrorPage from './components/errorPage'
+import { newAndEditEventAction } from './components/EventForm'
 import EventsLayout from './layout/eventsLayout'
 import RootLayout from './layout/rootLayout'
 import EditEvent from './pages/EditEvent'
 import EventDetail, { eventDeleteAction, eventLoader } from './pages/EventDetail'
 import Events, { getDummyEvents } from './pages/events'
 import Home from './pages/home'
-import NewEvent, { newEventAction } from './pages/NewEvent'
+import NewEvent from './pages/NewEvent'
 // Challenge / Exercise
 
 // 1. Add five new (dummy) page components (content can be simple <h1> elements)
@@ -46,10 +47,10 @@ const router = createBrowserRouter([
             loader: eventLoader,
             children: [
               {index: true, element: <EventDetail />, action: eventDeleteAction, },
-              {path: ':edit', element: <EditEvent/>},
+              {path: ':edit', element: <EditEvent/>, action: newAndEditEventAction},
             ]
           },
-          {path: 'new', element: <NewEvent /> , action: newEventAction},
+          {path: 'new', element: <NewEvent /> , action: newAndEditEventAction},
         ]},
       ],
   }
