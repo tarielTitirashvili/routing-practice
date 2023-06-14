@@ -19,7 +19,7 @@ function MainNavigation() {
            <NavLink to='/newsletter' className={isActive}>newsletter</NavLink>
           </li>
           <li>
-           <NavLink to='/auth' className={isActive}>Authentication</NavLink>
+           <NavLink to='/auth?mode=login' className={isActive}>Authentication</NavLink>
           </li>
         </ul>
       </nav>

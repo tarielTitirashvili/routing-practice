@@ -1,14 +1,17 @@
 import { useState } from 'react';
-import { Form } from 'react-router-dom';
+import { Form, Link, useSearchParams } from 'react-router-dom';
 
 import classes from './AuthForm.module.css';
 
-function AuthForm() {
-  const [isLogin, setIsLogin] = useState(true);
+const MODES = {
+  login: 'login',
+  signup: 'signup',
+}
 
-  function switchAuthHandler() {
-    setIsLogin((isCurrentlyLogin) => !isCurrentlyLogin);
-  }
+function AuthForm() {
+  // this hooks has second function for setting query params
+  const [searchParams] = useSearchParams()
+  const isLogin = searchParams.get('mode') === MODES.login
 
   return (
     <>
@@ -23,9 +26,9 @@ function AuthForm() {
           <input id="password" type="password" name="password" required />
         </p>
         <div className={classes.actions}>
-          <button onClick={switchAuthHandler} type="button">
+          <Link to={`?mode=${isLogin ? MODES.signup: MODES.login}`} type="button">
             {isLogin ? 'Create new user' : 'Login'}
-          </button>
+          </Link>
           <button>Save</button>
         </div>
       </Form>
