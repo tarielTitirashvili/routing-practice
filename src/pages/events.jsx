@@ -3,7 +3,7 @@ import { Await, defer, json, useLoaderData } from 'react-router-dom'
 import EventsList from '../components/EventsList'
 import Loading from '../components/loader'
 
-async function getEvents() {
+export async function getEvents() {
   const response = await fetch('http://localhost:8080/events')
 
   if (!response.ok) {
@@ -15,9 +15,9 @@ async function getEvents() {
   }
 }
 
-export const getDummyEvents = () => {
+export const loadDummyEvents = () => {
   return defer({
-    events: getEvents()
+    events: getEvents(),
   })
 }
 

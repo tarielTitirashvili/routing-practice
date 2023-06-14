@@ -1,26 +1,47 @@
-import React from 'react'
-import { json, redirect, useLoaderData, useRouteLoaderData } from 'react-router-dom'
+import React, { Suspense } from 'react'
+import { Await, defer, json, redirect, useRouteLoaderData } from 'react-router-dom'
 import EventItem from '../components/EventItem'
+import EventsList from '../components/EventsList'
+import Loader from '../components/loader'
+import { getEvents } from './events'
 
 function EventDetail() {
-  const data = useRouteLoaderData('eventId')
+  const {event, events} = useRouteLoaderData('eventId')
   // console.log(data)
-  return (
-    <EventItem event={data.event} />
+  return (<>
+    <Suspense fallback={<Loader/>}>
+      <Await resolve={event}>
+        {(event)=><EventItem event={event} />}
+      </Await>
+    </Suspense>
+    <Suspense fallback={<Loader/>}>
+      <Await resolve={events}>
+        {(events)=><EventsList events={events}/>}
+      </Await>
+    </Suspense>
+    </>
   )
 }
 
 export default EventDetail
 
+async function getEvent(eventId){
+  const response = await fetch('http://localhost:8080/events/'+eventId)
+  if(response.status !== 200){
+    throw json(response, { status: 500 })
+  }else{
+    const resData = await response.json()
+    return resData.event
+  }
+}
+
 export async function eventLoader({request, params}) {
-  // request gets access to the query string params
-  // params gets access to the route path params
-    const response = await fetch('http://localhost:8080/events/'+params.eventId)
-    // console.log(response)
-    if(response.status !== 200){
-      throw json(response, { status: 500 })
-    }else
-      return response
+  const eventId = params.eventId
+  return defer({
+    // by this approach we will wait until event data is loaded and only after that change route
+    event: await getEvent(eventId),
+    events: getEvents()
+  })
 }
 
 export async function eventDeleteAction({request, params:{eventId}}) {

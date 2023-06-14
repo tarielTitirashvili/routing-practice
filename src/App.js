@@ -5,7 +5,7 @@ import EventsLayout from './layout/eventsLayout'
 import RootLayout from './layout/rootLayout'
 import EditEvent from './pages/EditEvent'
 import EventDetail, { eventDeleteAction, eventLoader } from './pages/EventDetail'
-import Events, { getDummyEvents } from './pages/events'
+import Events, { loadDummyEvents } from './pages/events'
 import Home from './pages/home'
 import NewEvent from './pages/NewEvent'
 import NewsletterPage from './pages/Newsletter'
@@ -20,7 +20,7 @@ const router = createBrowserRouter([
       children: [
         {index: true, element: <Home />},
         {path: 'events', element: <EventsLayout/>, children: [
-          {index: true, element: <Events/>, loader: getDummyEvents},
+          {index: true, element: <Events/>, loader: loadDummyEvents},
           {
             path: ':eventId', 
             id: 'eventId',
