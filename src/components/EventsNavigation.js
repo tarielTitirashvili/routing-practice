@@ -1,7 +1,8 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, useRouteLoaderData } from 'react-router-dom';
 import css from './EventsNavigation.module.css';
 
 function EventsNavigation() {
+  const token = useRouteLoaderData('root')
 
   const isActive = ({isActive})=>isActive ? css.active : ''
 
@@ -12,9 +13,11 @@ function EventsNavigation() {
           <li>
             <NavLink to="/events" className={isActive} end >All Events</NavLink>
           </li>
-          <li>
+          {
+          token && <li>
             <NavLink to="/events/new" className={isActive}>New Event</NavLink>
           </li>
+          }
         </ul>
       </nav>
     </header>

@@ -3,6 +3,7 @@ import { Await, defer, json, redirect, useRouteLoaderData } from 'react-router-d
 import EventItem from '../components/EventItem'
 import EventsList from '../components/EventsList'
 import Loader from '../components/loader'
+import { getAuthToken } from '../utils/auth'
 import { getEvents } from './events'
 
 function EventDetail() {
@@ -50,6 +51,9 @@ export async function eventDeleteAction({request, params:{eventId}}) {
     console.log('here')
     await fetch('http://localhost:8080/events/'+eventId, {
       method: request.method,
+      headers:{
+        'authorization': 'Bearer ' + getAuthToken()
+      }
     })
     return redirect('/events')
   }catch(e){

@@ -29,6 +29,12 @@ export async function loginSignUpAction ({request}){
     return response
   else if(!response.ok)
     throw json({message: 'Could not authenticate user.'}, {status: 500})
-  else
-    return response
+  else{
+    const resData = await response.json()
+    const token = resData.token
+
+    localStorage.setItem('token', token)
+    
+    return redirect('/')
+  }
 }

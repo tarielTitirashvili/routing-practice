@@ -11,12 +11,16 @@ import NewEvent from './pages/NewEvent'
 import NewsletterPage from './pages/Newsletter'
 import {action as newNewsletterAction} from './pages/Newsletter'
 import AuthenticationPage, { loginSignUpAction } from './pages/Authentication'
+import { logoutAction } from './pages/Logout'
+import { tokenLoader } from './utils/auth'
 // Challenge / Exercise
 
 const router = createBrowserRouter([
   {
     path: '/', 
-    element: <RootLayout />, 
+    element: <RootLayout />,
+    id: 'root',
+    loader: tokenLoader,
     errorElement: <ErrorPage />,
       children: [
         {index: true, element: <Home />},
@@ -39,6 +43,10 @@ const router = createBrowserRouter([
         {
           path: 'auth', element: <AuthenticationPage/>, action: loginSignUpAction
         },
+        {
+          path: 'logout',
+          action: logoutAction,
+        }
       ],
   }
 ])
