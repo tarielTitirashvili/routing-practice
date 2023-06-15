@@ -10,7 +10,7 @@ import Home from './pages/home'
 import NewEvent from './pages/NewEvent'
 import NewsletterPage from './pages/Newsletter'
 import {action as newNewsletterAction} from './pages/Newsletter'
-import AuthenticationPage from './pages/Authentication'
+import AuthenticationPage, { loginSignUpAction } from './pages/Authentication'
 // Challenge / Exercise
 
 const router = createBrowserRouter([
@@ -37,7 +37,7 @@ const router = createBrowserRouter([
           path: 'newsLetter', element: <NewsletterPage/>, action: newNewsletterAction
         },
         {
-          path: 'auth', element: <AuthenticationPage/>
+          path: 'auth', element: <AuthenticationPage/>, action: loginSignUpAction
         },
       ],
   }
