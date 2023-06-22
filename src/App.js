@@ -12,7 +12,7 @@ import NewsletterPage from './pages/Newsletter'
 import {action as newNewsletterAction} from './pages/Newsletter'
 import AuthenticationPage, { loginSignUpAction } from './pages/Authentication'
 import { logoutAction } from './pages/Logout'
-import { tokenLoader } from './utils/auth'
+import { checkAuthLoader, tokenLoader } from './utils/auth'
 // Challenge / Exercise
 
 const router = createBrowserRouter([
@@ -32,10 +32,10 @@ const router = createBrowserRouter([
             loader: eventLoader,
             children: [
               {index: true, element: <EventDetail />, action: eventDeleteAction, },
-              {path: ':edit', element: <EditEvent/>, action: newAndEditEventAction},
+              {path: ':edit', element: <EditEvent/>, action: newAndEditEventAction, loader: checkAuthLoader},
             ]
           },
-          {path: 'new', element: <NewEvent /> , action: newAndEditEventAction},
+          {path: 'new', element: <NewEvent /> , action: newAndEditEventAction, loader: checkAuthLoader},
         ]},
         {
           path: 'newsLetter', element: <NewsletterPage/>, action: newNewsletterAction
