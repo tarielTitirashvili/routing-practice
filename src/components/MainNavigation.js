@@ -5,7 +5,7 @@ import NewsletterSignup from './NewsletterSignup';
 function MainNavigation() {
   const token = useRouteLoaderData('root')
   const isActive = ({isActive})=>isActive ? css.active : ''
-  console.log(token)
+  
   return (
     <header className={css.header}>
       <nav>

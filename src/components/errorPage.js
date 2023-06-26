@@ -6,7 +6,6 @@ function ErrorPage() {
   // useRouteError gets error object from route error
   const error = useRouteError()
   
-  // console.log(error)
   if(error.status === 404) {
     return<div>
       <MainNavigation/>

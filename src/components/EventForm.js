@@ -7,7 +7,6 @@ function EventForm({ method, event={} }) {
   const navigate = useNavigate();
   const navigation = useNavigation();
   const actionData = useActionData()
-  console.log(actionData)
   const isSubmitting = navigation.state === 'submitting'
 
   function cancelHandler() {
@@ -54,8 +53,6 @@ export default EventForm;
 
 export async function newAndEditEventAction({request, params}) {
 
-  console.log('request',request)
-  console.log('params', params)
 
   const method = request.method
 

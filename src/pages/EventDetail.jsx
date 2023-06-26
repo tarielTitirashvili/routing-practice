@@ -8,7 +8,6 @@ import { getEvents } from './events'
 
 function EventDetail() {
   const {event, events} = useRouteLoaderData('eventId')
-  // console.log(data)
   return (<>
     <Suspense fallback={<Loader/>}>
       <Await resolve={event}>
@@ -46,9 +45,7 @@ export async function eventLoader({request, params}) {
 }
 
 export async function eventDeleteAction({request, params:{eventId}}) {
-  console.log('here')
   try{
-    console.log('here')
     await fetch('http://localhost:8080/events/'+eventId, {
       method: request.method,
       headers:{
